@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const chalk = require('chalk')
 const logger = require('morgan')
 const dotenv = require('dotenv')
 dotenv.config()
@@ -18,4 +19,4 @@ app.use(logger("short"))
 app.use(routes)
 
 app.listen(port,
-     ()=> console.log(`server is running on http://localhost:${port}`))
+     ()=> console.log(chalk.bold.yellow(`server is running on http://localhost:${port}`)))
