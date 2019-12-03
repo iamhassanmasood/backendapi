@@ -1,21 +1,21 @@
-const express = require('express')
-const router = express.Router()
+ const express = require('express')
+ const crypo = require('crypto');
+ const router = express.Router();
+ const User = require('../models/User')
+ 
 
-const User = require('../models/User')
-
-router.post('/register', async (req, res) => {
-
-   const newUser = new User({
-     username : req.body.username,
-     email: req.body.email,
-     password: req.body.password
-   })
-   await newUser.save().then( ()=>{
-     res.status(200).json(newUser);
-   }).catch(err=> console.log(err))
-
+router.post("/register", (req, res, next)=>{
+  const user = new User({
+    email:"iamhassanmasood@gmail.com",
+    password:"test"
+  })
+  user.save()
+  .then(result =>{
+    console.log(result)
+    res.status(201).json({message:"New user added to db"})})
+  .catch((err) => next(err))
 })
-router.get('/', (req, res, next)=>{
-  res.send("<h1>Hello / </h1>")
-})
-module.exports = router;
+  
+
+ module.exports = router;
+

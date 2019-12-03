@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
 const crypto = require('crypto');
-const Schema = mongoose.Schema
+const mongoose = require('mongoose')
 
-const UserSchema = new Schema({
+const UserSchema = mongoose.Schema({
+
   username:{
     type:String
   },
