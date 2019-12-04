@@ -1,18 +1,20 @@
 const express = require('express')
 const router = express.Router();
 const User = require('../../models/User')
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 router.post("/signup", (req, res, next)=>{
+ const payload = req.body;
  const user = new User({
-   username:req.body.username,
-   email:req.body.email,
-   password:req.body.password
+   username:payload.username,
+   email:payload.email,
+   password:payload.password
  })
- User.findOne({email:req.body.email} && {username:req.body.username}).then(u=>{
+ User.findOne({email:payload.email} && {username:payload.username}).then(u=>{
    if(!u){
     bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(req.body.password, salt, function(err, hash) {
+      bcrypt.hash(payload.password, salt, function(err, hash) {
+        if(err) throw new Error(err)
           user.password = hash
       })
   })
@@ -23,8 +25,7 @@ router.post("/signup", (req, res, next)=>{
    } else {
      res.status(409).json({message: "Mail or Username already exists"})
    }
- }).catch((err) => console.log(err))
+ })
 })
- 
 
 module.exports = router;
