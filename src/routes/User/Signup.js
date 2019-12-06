@@ -16,12 +16,12 @@ router.post("/signup", (req, res, next)=>{
       bcrypt.hash(payload.password, salt, function(err, hash) {
         if(err) throw new Error(err)
           user.password = hash
+          user.save()
+          .then(result =>{
+            res.status(201).json({message:"New user added to db", result})})
+          .catch((err) => next(err))
       })
   })
-     user.save()
-     .then(result =>{
-       res.status(201).json({message:"New user added to db", result})})
-     .catch((err) => next(err))
    } else {
      res.status(409).json({message: "Mail or Username already exists"})
    }
