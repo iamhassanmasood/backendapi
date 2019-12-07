@@ -8,8 +8,19 @@ const routes = require('./routes')
 const mongoose = require('mongoose')
 const db = require('./config/index').uri;
 const bodyParser = require('body-parser')
+const fs = require('fs')
+const path = require("path")
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
+
+try {
+  fs.existsSync(path.join(__dirname, '/../public')) || fs.mkdirSync(path.join(__dirname, '/../public'));
+  fs.existsSync(path.join(__dirname, '/../public/uploads')) || fs.mkdirSync(path.join(__dirname, '/../public/uploads'));
+} catch (err) {
+  console.log(err);
+}
+
 mongoose.connect(db,  { useNewUrlParser: true });
 const connection = mongoose.connection;
 connection.once('open', function() {
