@@ -18,7 +18,7 @@ try {
   fs.existsSync(path.join(__dirname, '/../public')) || fs.mkdirSync(path.join(__dirname, '/../public'));
   fs.existsSync(path.join(__dirname, '/../public/uploads')) || fs.mkdirSync(path.join(__dirname, '/../public/uploads'));
 } catch (err) {
-  console.log(err);
+  console.log("error" + err);
 }
 
 mongoose.connect(db,  { useNewUrlParser: true });
