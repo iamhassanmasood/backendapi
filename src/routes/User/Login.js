@@ -28,7 +28,7 @@ router.post("/login", (req, res, next) => {
                       );
                     return res.status(200).json({ 
                         message: "Login success", 
-                        token:token 
+                        token
                     })
                 } else {
                     return res.status(401).json({ message: "Invalid credencial" })

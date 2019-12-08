@@ -23,7 +23,7 @@ router.post("/signup", (req, res, next)=>{
       })
   })
    } else {
-     res.status(409).json({message: "Mail or Username already exists"})
+     res.status(409).json({message: "E-Mail or Username already exists"})
    }
  })
 })
