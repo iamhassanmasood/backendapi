@@ -1,2 +1,4 @@
 Express in action
 Passportjs passportjwt 
+Sessions store in server
+Tokens store in localstorage
